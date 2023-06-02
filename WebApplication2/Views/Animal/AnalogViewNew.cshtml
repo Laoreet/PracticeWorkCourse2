@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication2.DataObjects.Animal>
+
+@{
+    ViewData["Title"] = "AnalogViewNew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Животные</h1>
+
+<style>
+    .avatar {
+        vertical-align: middle;
+        width: 220px;
+        height: 200px;
+        margin-left: 25px;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="row" style="max-width: 300px;">
+    <form method="post">
+        <select id="type" name="type" class="form-control" asp-items="ViewBag.AnimalTypes"></select>
+        <input type="submit" value="Применить" />
+    </form>
+    @*<a asp-action="AnalogViewNew" class="btn btn-sm btn-success">Вид</a>*@
+</div>
+
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var animal in Model)
+        {
+            <div class="col-lg-4">
+                <img src="@Url.Action("RenderImage", new {id = animal.AnimalId})" alt="" class="avatar" />
+                <h2 style="margin-left: 25px;">@animal.Name</h2>
+                <p style="font-size: 20px; margin-left:25px;">@animal.AnimalType.AnimalTypeName</p>
+                <p style="font-size: 20px; margin-left:25px;">@animal.AnimalSex</p>
+                <p style="font-size: 20px; margin-left:25px;">Возраст: @animal.Age</p>
+                <p style="margin-left:25px;"><a asp-action="Details" asp-route-id="@animal.AnimalId" class="btn btn-sm btn-primary ml-1"><i class="fa fa-info-circle fa-lg"></i></a></p>
+            </div>
+        }
+    }
+</div>
+
+

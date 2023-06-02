@@ -1,0 +1,133 @@
+﻿@model IEnumerable<WebApplication2.DataObjects.Animal>
+
+@{
+    ViewData["Title"] = "Index";
+
+    Paging paging = new Paging();
+    int pageNum = 0;
+
+    if (ViewBag.Paging != null)
+    {
+        paging = ViewBag.Paging;
+        pageNum = paging.CurrentPage;
+    }
+}
+
+<style>
+    .avatar {
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+    }
+</style>
+
+<h1>Животные</h1>
+
+@if (DB.status != "client" && DB.status != "guest")
+{
+    <p>
+        <a asp-action="Create" class="btn btn-sm btn-success">Добавить <i class="fa fa-plus-square fa-lg"></i></a>
+    </p>
+    <a asp-action="AnalogViewNew" class="btn btn-sm btn-success">Вид</a>
+    <a asp-action="ExportExcel"  class="btn btn-sm btn-success">Экспорт <i class="fa fa-download fa-lg"></i></a>
+}
+
+
+<partial name="_paging" model="@paging" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimalId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimalSex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coloring)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Breed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specificity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.History)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimalType.AnimalTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station.StationName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnimalId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src="@Url.Action("RenderImage", new {id = item.AnimalId})" alt="" class="avatar"/>
+                @*@Html.DisplayFor(modelItem => item.Photo)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimalSex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coloring)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specificity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.History)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimalType.AnimalTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Station.StationName)
+            </td>
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.AnimalId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AnimalId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AnimalId">Delete</a>
+                *@
+
+                <div class="buttons">
+                    <a asp-action="Details" asp-route-id="@item.AnimalId" class="btn btn-sm btn-primary ml-1"><i class="fa fa-info-circle fa-lg"></i></a>
+                        @if (DB.status != "client" && DB.status != "guest")
+                        {
+                    <a asp-action="Edit" asp-route-id="@item.AnimalId"  class="btn btn-sm btn-info"><i class="fa fa-pencil fa-lg"></i></a> 
+                            <a asp-action="Delete" asp-route-id="@item.AnimalId" class="btn btn-sm btn-danger ml-1"><i class="fa fa-trash-o fa-lg"></i></a>
+                        }
+                </div>
+            </td>
+        </tr>
+}
+
+    </tbody>
+</table>

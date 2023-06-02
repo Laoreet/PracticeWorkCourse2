@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\styles\foodfinda.css" />
+    <Content Remove="wwwroot\styles\StyleSheet.css" />
+    <Content Remove="wwwroot\styles\templateEduc.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.101.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\Files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\ырше\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\ырше\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\ырше\fonts\Plain-Bold.woff2" />
+    <None Include="wwwroot\ырше\fonts\Plain-Light.woff2" />
+    <None Include="wwwroot\ырше\fonts\Plain-Regular.woff2" />
+    <None Include="wwwroot\ырше\js\aos.js" />
+    <None Include="wwwroot\ырше\js\bootstrap.min.js" />
+    <None Include="wwwroot\ырше\js\custom.js" />
+    <None Include="wwwroot\ырше\js\jquery.min.js" />
+    <None Include="wwwroot\ырше\js\owl.carousel.min.js" />
+    <None Include="wwwroot\ырше\js\rellax.min.js" />
+    <None Include="wwwroot\ырше\js\smoothscroll.js" />
+    <None Include="wwwroot\styles\foodfinda.css" />
+    <None Include="wwwroot\styles\StyleSheet.css" />
+    <None Include="wwwroot\styles\templateEduc.css" />
+  </ItemGroup>
+
+</Project>

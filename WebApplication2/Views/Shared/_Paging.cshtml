@@ -1,0 +1,32 @@
+﻿@model WebApplication2.Models.Paging
+<div class="container">
+	@if (Model.TotalPages > 0)
+	{
+		<ul class="pagination justify-content-end">
+			@if (Model.CurrentPage>1)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="@Model.CurrentTable" asp-action="Index" asp-route-pg="1"><i class="fa fa-angle-double-left fa-lg"></i></a>
+				</li>
+				<li>
+					<a class="page-link" asp-controller="@Model.CurrentTable" asp-action="Index" asp-route-pg="@(Model.CurrentPage-1)"><i class="fa fa-angle-left fa-lg"></i></a>
+				</li>
+			}
+			@for (var pge = Model.StartPage; pge <=Model.EndPage; pge++)
+			{
+				<li class="page-item @(pge == Model.CurrentPage ? "active" : "")">
+					<a class="page-link" asp-controller="@Model.CurrentTable" asp-action="Index" asp-route-pg="@pge">@pge</a>
+				</li>
+			}
+			@if (Model.CurrentPage < Model.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="@Model.CurrentTable" asp-action="Index" asp-route-pg="@(Model.CurrentPage+1)"><i class="fa fa-angle-right fa-lg"></i></a>
+				</li>
+				<li>
+					<a class="page-link" asp-controller="@Model.CurrentTable" asp-action="Index" asp-route-pg="@(Model.TotalPages)"><i class="fa fa-angle-double-right fa-lg"></i></a>
+				</li>
+			}
+		</ul>
+	}
+</div>

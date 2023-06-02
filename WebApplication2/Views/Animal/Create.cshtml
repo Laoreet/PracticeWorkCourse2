@@ -1,0 +1,97 @@
+﻿@model WebApplication2.DataObjects.Animal
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h1>Добавить</h1>
+
+<h4>Животное</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="StationId" class="control-label"></label>
+                    <select asp-for="StationId" class="form-control" asp-items="ViewBag.Stations"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AnimalTypeId" class="control-label"></label>
+                    <select asp-for="AnimalTypeId" class="form-control" asp-items="ViewBag.AnimalTypes"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AnimalSex" class="control-label"></label>
+                    <select asp-for="AnimalSex" class="form-control" asp-items="ViewBag.Sexes"></select>
+                    <span asp-validation-for="AnimalSex" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Coloring" class="control-label"></label>
+                    <input asp-for="Coloring" class="form-control" />
+                    <span asp-validation-for="Coloring" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Breed" class="control-label"></label>
+                    <input asp-for="Breed" class="form-control" />
+                    <span asp-validation-for="Breed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Specificity" class="control-label"></label>
+                    <input asp-for="Specificity" class="form-control" />
+                    <span asp-validation-for="Specificity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="History" class="control-label"></label>
+                    <input asp-for="History" class="form-control" />
+                    <span asp-validation-for="History" class="text-danger"></span>
+                </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                        <img id="animalphoto" alt="terst" src="~/images/missing.png" style="border-width: 0px; width: 200px; height: 200px;" />
+                        <input asp-for="PhotoHelper" class="form-control custom-file-input" type="file" />
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*ДОБАВЛЯЕМ ВАЛИДАЦИЮ ДЛЯ ВЫВОДА ОШИБКИ*@
+<div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+
+<div>
+    <a asp-action="Index" class="btn-info">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+<script type="text/javascript">
+    $(".custom-file-input").on("change", function() {
+
+            document.getElementById('animalPhoto').src = @Url.Action("ImageFromByte", new {arr = Model.Photo});
+
+        //var fileName = $(this).val().split("\\").pop();
+
+        //document.getElementById('animalPhoto').src = window.URL.createObjectURL(this.files[0]);
+
+        //    document.getElementById('animalPhoto').alt = "DSADSA";
+    });
+    </script>
+}

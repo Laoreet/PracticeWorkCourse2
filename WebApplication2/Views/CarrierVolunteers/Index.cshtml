@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication2.DataObjects.CarrierVolunteer>
+
+@{
+    ViewData["Title"] = "Index";
+
+    Paging paging = new Paging();
+    int pageNum = 0;
+
+    if (ViewBag.Paging != null)
+    {
+        paging = ViewBag.Paging;
+        pageNum = paging.CurrentPage;
+    }
+}
+
+<h1>Волонтеры-перевозчики</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success">Добавить <i class="fa fa-plus-square fa-lg"></i></a>
+</p>
+<a asp-action="ExportExcel" class="btn btn-sm btn-success">Экспорт <i class="fa fa-download fa-lg"></i></a>
+
+
+<partial name="_paging" model="@paging" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Station.StationName)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.CarrierVolunteerId" class="btn btn-sm btn-info"><i class="fa fa-pencil fa-lg"></i></a>  |
+                    <a asp-action="Details" asp-route-id="@item.CarrierVolunteerId" class="btn btn-sm btn-primary ml-1"><i class="fa fa-info-circle fa-lg"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.CarrierVolunteerId" class="btn btn-sm btn-danger ml-1"><i class="fa fa-trash-o fa-lg"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

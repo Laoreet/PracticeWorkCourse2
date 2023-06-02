@@ -1,0 +1,85 @@
+﻿@model WebApplication2.DataObjects.Animal
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Подробности</h1>
+
+<div>
+    <h4>Животное @Model.AnimalId</h4>
+    <hr />
+    <dl class="row" style="align-items: center;
+border:groove;
+background: rgb(255,255,255);
+background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(219,211,246,1) 100%);
+min-width: 640px; max-width: 700px;">
+        <div>
+            <img src="@Url.Action("RenderImage", new {id = Model?.AnimalId})" alt="" style="max-height: 400px; max-width:400px; align-self: center" />
+        </div>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AnimalSex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AnimalSex)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Coloring)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Coloring)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Breed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Breed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Specificity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Specificity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.History)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.History)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AnimalType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AnimalType.AnimalTypeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Station)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Station.StationName)
+        </dd>
+        <div style="margin-bottom: 10px;">
+            @* <a asp-controller="Animal" asp-action="AnalogView" asp-route-id="0" class="btn btn-sm btn-success">Вид</a> *@
+            @if (DB.status != "client" && DB.status != "guest")
+            {
+                <a asp-action="Edit" asp-route-id="@Model?.AnimalId" class="btn btn-sm btn-info"><i class="fa fa-pencil fa-lg"></i></a>
+            }
+            <a asp-action="AddAnimalApplication" asp-route-id="@Model?.AnimalId" class="btn btn-sm btn-light">Забрать <i class="fa fa-paw fa-lg"></i></a>
+        </div>
+    </dl>
+</div>
